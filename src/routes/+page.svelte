@@ -3,65 +3,66 @@
 	import FHEPrintModal from "../lib/components/BulkPrint.svelte";
 	import SignatureModal from "../lib/components/SignatureModal.svelte";
 
-	let fullname = "";
-	let email = "";
-	let phone = "";
-	let course = "";
-	let id = "";
-	let address = "";
-	let sex = "";
-	let civil_status = "";
-	let year_level = "";
-	let type_student = "";
-	let school_name_last_attended = "";
-	let year_last_attended = "";
-	let scholarship = "";
-	let scholarship_name = "";
-	let mother_name = "";
-	let father_name = "";
-	let mother_occupation = "";
-	let father_occupation = "";
-	let mother_income = 0.0;
-	let father_income = 0.0;
-	let date_of_application = "";
+  let studentcanvas;
+  let studentsignaturePad;
+  let studentsignatureData = "";
 
-	// Picture upload
-	let student_picture = null;
-	let student_picture_preview = "";
+  let guardianCanvas;
+  let guardianSignaturePad;
+  let guardianSignatureData = "";
 
-	// Guardian/Parent info
-	let guardian_name = "";
-	let guardian_relationship = "";
+  let fullname = "";
+  let email = "";
+  let phone = "";
+  let course = "";
+  let id = "";
+  let address = "";
+  let sex = "";
+  let civil_status = "";
+  let year_level = "";
+  let type_student = [];
+  let school_name_last_attended = "";
+  let year_last_attended = "";
+  let scholarship = "";
+  let scholarship_name = "";
+  let mother_name = "";
+  let father_name = "";
+  let mother_occupation = "";
+  let father_occupation = "";
+  let mother_income = "";
+  let father_income = "";
+  let date_of_application = "";
 
-	// Server message
-	let serverMessage = "";
-	let serverMessageType = ""; // "success" or "error"
+  // Picture upload
+  let student_picture = null;
+  let student_picture_preview = "";
 
-	let showPrintModal = false;
-	let showPreviewModal = false;
-	let showStudentSignatureModal = false;
-	let showGuardianSignatureModal = false;
+  // Guardian/Parent info
+  let guardian_name = "";
+  let guardian_relationship = "";
 
-	// Define signature data variables
-	let studentsignatureData = "";
-	let guardianSignatureData = "";
+  // Server message
+  let serverMessage = "";
+  let serverMessageType = ""; // "success" or "error"
 
-	function handlePictureChange(event) {
-		const file = event.target.files[0];
-		student_picture = file;
-		if (file) {
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				student_picture_preview = e.target.result;
-			};
-			reader.readAsDataURL(file);
-		} else {
-			student_picture_preview = "";
-		}
-	}
+  function handlePictureChange(event) {
+    const file = event.target.files[0];
+    student_picture = file;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        student_picture_preview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      student_picture_preview = "";
+    }
+  }
 
-	async function submitForm(event) {
-		event.preventDefault();
+  onMount(() => {
+    studentsignaturePad = new SignaturePad(studentcanvas);
+    guardianSignaturePad = new SignaturePad(guardianCanvas);
+  });
 
 		const formData = new FormData();
 		formData.append("student_picture", student_picture);
@@ -103,12 +104,34 @@
 				return;
 			}
 
-			let result;
-			try {
-				result = await response.json();
-			} catch {
-				result = { message: await response.text(), success: false };
-			}
+    // Use FormData to send the image and other fields
+    const formData = new FormData();
+    formData.append("student_picture", student_picture);
+    formData.append("student_signature", studentsignatureData);
+    formData.append("guardian_signature", guardianSignatureData);
+    formData.append("guardian_name", guardian_name);
+    formData.append("guardian_relationship", guardian_relationship);
+    formData.append("fullname", fullname);
+    formData.append("id", id);
+    formData.append("address", address);
+    formData.append("sex", sex);
+    formData.append("civil_status", civil_status);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("course", course);
+    formData.append("year_level", year_level);
+    formData.append("type_student", JSON.stringify(type_student));
+    formData.append("school_name_last_attended", school_name_last_attended);
+    formData.append("year_last_attended", year_last_attended);
+    formData.append("scholarship", scholarship);
+    formData.append("scholarship_name", scholarship_name);
+    formData.append("mother_name", mother_name);
+    formData.append("father_name", father_name);
+    formData.append("mother_occupation", mother_occupation);
+    formData.append("father_occupation", father_occupation);
+    formData.append("mother_income", mother_income);
+    formData.append("father_income", father_income);
+    formData.append("date_of_application", date_of_application);
 
 			serverMessage = result.message || "Thanks for submitting!";
 			serverMessageType = result.success ? "success" : "error";
@@ -204,40 +227,13 @@
 		guardian_relationship = "Guardian";
 	}
 
-	function openPrintModal() {
-		showPrintModal = true;
-	}
-	function closePrintModal() {
-		showPrintModal = false;
-	}
-	function openPreviewModal() {
-		showPreviewModal = true;
-	}
-	function closePreviewModal() {
-		showPreviewModal = false;
-	}
-	function openStudentSignatureModal() {
-		showStudentSignatureModal = true;
-	}
-	function closeStudentSignatureModal() {
-		showStudentSignatureModal = false;
-	}
-	function openGuardianSignatureModal() {
-		showGuardianSignatureModal = true;
-	}
-	function closeGuardianSignatureModal() {
-		showGuardianSignatureModal = false;
-	}
-	function handleStudentSignatureSave(event) {
-		studentsignatureData = event.detail.data;
-		showStudentSignatureModal = false;
-	}
-	function handleGuardianSignatureSave(event) {
-		guardianSignatureData = event.detail.data;
-		showGuardianSignatureModal = false;
-	}
-	// Calculate total income
-	$: total_income = parseFloat(father_income) + parseFloat(mother_income);
+      serverMessage = result.message || "Thanks for submitting!";
+      serverMessageType = result.success ? "success" : "error";
+    } catch (error) {
+      serverMessage = "An error occurred. Please try again.";
+      serverMessageType = "error";
+    }
+  }
 </script>
 
 <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Free Higher Education Application Form</h1>
