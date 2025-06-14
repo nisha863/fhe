@@ -10,7 +10,18 @@
 ## Installation
 >first install [Git here](https://git-scm.com/downloads/win) and [node js here](https://nodejs.org/en/download)
 
+<<<<<<< HEAD
 cd to desired folder or open powershell to that folder and paste the following:
+=======
+If you're seeing this, you've probably already done this step. Congrats!
+
+```python
+# create a new project in the current directory
+npx sv create
+
+# create a new project in my-app
+npx sv create my-app
+>>>>>>> dad2cdab25f1d294e345d45be2e8976f1b7f9150
 ```
 git clone https://github.com/nisha863/fhe.git
 cd fhe
