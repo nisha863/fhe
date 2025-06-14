@@ -80,7 +80,9 @@
 				{#if !isSaved}
 					<button type="button" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" on:click={saveSignature}>Save</button>
 				{:else}
-					<button type="button" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" on:click={editSignature}>Edit Signature</button>
+					<button type="button" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" on:click={editSignature}
+						>Edit Signature</button
+					>
 				{/if}
 			</div>
 		</div>
