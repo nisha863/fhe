@@ -26,14 +26,13 @@ this will run vite that show sveltekit in http://localhost:5173/ or just press "
 ## npm package used
 | Package   | Version | Description |
 |-----------|---------|-------------|
-| [pdf-lib](https://www.npmjs.com/package/pdf-lib) | ![npm](https://img.shields.io/npm/v/pdf-lib) | PDf Maker
+| [pdf-lib](https://www.npmjs.com/package/pdf-lib) | ![npm](https://img.shields.io/npm/v/pdf-lib) | PDf Maker |
 | [Signature Pad](https://www.npmjs.com/package/signature_pad) | ![npm](https://img.shields.io/npm/v/signature_pad) | Signature Taker|
-
+| [mysql2](https://www.npmjs.com/package/mysql2) | ![npm](https://shields.io/npm/v/mysql2)| Database handling |
 
 # fixing common problems
 ### the database
 - import [the sql](https://github.com/nisha863/fhe/blob/main/fhe_db.sql) as database
-- put [this php](https://github.com/nisha863/fhe/blob/main/static/student.php) to htdocs folder
 
 
 
