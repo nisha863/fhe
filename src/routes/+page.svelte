@@ -93,7 +93,7 @@
 		formData.append("date_of_application", date_of_application);
 
 		try {
-			const response = await fetch("http://localhost/back-folder/student.php", {
+			const response = await fetch("http://localhost/back_end_fhe/student.php", {
 				method: "POST",
 				body: formData,
 			});
@@ -258,7 +258,7 @@
 			<legend class="text-lg font-semibold text-gray-700 px-2 mb-4">Student Information</legend>
 
 			<!-- Row: Date, Full Name, ID -->
-			<div class="mb-4 flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
+			<div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
 				<div class="flex-1 min-w-0">
 					<label for="date_of_application" class="block text-sm font-medium text-gray-700">Date of Application</label>
 					<input id="date_of_application" type="text" bind:value={date_of_application} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
@@ -269,19 +269,19 @@
 				</div>
 				<div class="flex-1 min-w-0">
 					<label for="id" class="block text-sm font-medium text-gray-700">ID Number</label>
-					<input id="id" type="text" bind:value={id} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
+					<input id="id" type="number" bind:value={id} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
 				</div>
 			</div>
 
 			<!-- Row: Address, Phone, Email -->
-			<div class="mb-4 flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
+			<div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
 				<div class="flex-1 min-w-0">
 					<label for="address" class="block text-sm font-medium text-gray-700">Complete Address</label>
 					<input id="address" type="text" bind:value={address} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
 				</div>
 				<div class="flex-1 min-w-0">
 					<label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-					<input id="phone" type="text" bind:value={phone} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
+					<input id="phone" type="number" bind:value={phone} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
 				</div>
 				<div class="flex-1 min-w-0">
 					<label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
@@ -290,7 +290,7 @@
 			</div>
 
 			<!-- Row: Course, Year Level, Type of Student -->
-			<div class="mb-4 flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
+			<div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
 				<div class="flex-1 min-w-0">
 					<label for="course" class="block text-sm font-medium text-gray-700">Course</label>
 					<input id="course" type="text" bind:value={course} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
@@ -305,21 +305,10 @@
 						<option value="4th Year">4th Year</option>
 					</select>
 				</div>
-				<div class="flex-1 min-w-0">
-					<label for="type_student" class="block text-sm font-medium text-gray-700 mb-1" id="type_student_label">Type of Student</label>
-					<div class="flex flex-row gap-2 md:gap-4" role="radiogroup" aria-labelledby="type_student_label">
-						<input id="type_student_new" type="radio" bind:group={type_student} value="New" class="form-radio h-5 w-5 text-blue-600" required />
-						<label for="type_student_new" class="ml-2 text-gray-700">New</label>
-						<input id="type_student_continuing" type="radio" bind:group={type_student} value="Continuing" class="form-radio h-5 w-5 text-blue-600" required />
-						<label for="type_student_continuing" class="ml-2 text-gray-700">Continuing</label>
-						<input id="type_student_returning" type="radio" bind:group={type_student} value="Returning" class="form-radio h-5 w-5 text-blue-600" required />
-						<label for="type_student_returning" class="ml-2 text-gray-700">Returning</label>
-					</div>
-				</div>
 			</div>
 
 			<!-- Sex & Civil Status Row -->
-			<div class="mb-4 flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
+			<div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
 				<div class="flex-1 min-w-0">
 					<label for="sex" class="block text-sm font-medium text-gray-700">Sex</label>
 					<div class="flex space-x-4 mt-1">
@@ -349,26 +338,34 @@
 			</div>
 
 			<!-- If New Student -->
+			<div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div class="flex-1 min-w-0">
+					<label for="type_student" class="block text-sm font-medium text-gray-700 mb-1" id="type_student_label">Type of Student</label>
+					<div class="flex items-center gap-2" role="radiogroup" aria-labelledby="type_student_label">
+						<input id="type_student_new" type="radio" bind:group={type_student} value="New" class="form-radio h-5 w-5 text-blue-600" required />
+						<label for="type_student_new" class="ml-2 text-gray-700">New</label>
+						<input id="type_student_continuing" type="radio" bind:group={type_student} value="Continuing" class="form-radio h-5 w-5 text-blue-600" required />
+						<label for="type_student_continuing" class="ml-2 text-gray-700">Continuing</label>
+						<input id="type_student_returning" type="radio" bind:group={type_student} value="Returning" class="form-radio h-5 w-5 text-blue-600" required />
+						<label for="type_student_returning" class="ml-2 text-gray-700">Returning</label>
+					</div>
+					
+			<!-- If New Student -->
 			{#if type_student === "New"}
-				<div class="mb-4 flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
-					<div class="flex-1 min-w-0">
 						<label for="school_name_last_attended" class="block text-sm font-medium text-gray-700 mb-1">
 							If <span class="font-semibold">NEW</span>, indicate name of school last attended
 						</label>
 						<input id="school_name_last_attended" type="text" bind:value={school_name_last_attended} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
-					</div>
 					<div class="flex-1 min-w-0">
 						<label for="school_year_last_attended" class="block text-sm font-medium text-gray-700 mb-1"> School Year Last Attended </label>
 						<input id="school_year_last_attended" type="text" bind:value={year_last_attended} class="mt-1 block w-full max-w-xs border-gray-700 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm" required />
 					</div>
-				</div>
 			{/if}
-
-			<!-- Scholarship Section -->
-			<div class="mb-4 flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
+				</div>
+			<!-- Scholarship Section -->	
 				<div class="flex-1 min-w-0">
 					<label for="scholarship" class="block text-sm font-medium text-gray-700 mb-1">Are you a recipient of any scholarship/grant?</label>
-					<div class="flex flex-row gap-2 md:gap-6">
+					<div class="flex flex-row gap-2 md:gap-8">
 						<label class="inline-flex items-center">
 							<input id="scholarship_yes" type="radio" bind:group={scholarship} value="Yes" class="form-radio h-5 w-5 text-blue-600" required />
 							<span class="ml-2 text-gray-700">Yes</span>

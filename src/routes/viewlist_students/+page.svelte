@@ -7,7 +7,7 @@
 
   onMount(async () => {
     try {
-      const res = await fetch('http://localhost/back-folder/get_students.php');
+      const res = await fetch('http://localhost/back_end_fhe/students.php');
       if (!res.ok) throw new Error("Failed to fetch students.");
       students = await res.json();
     } catch (e) {
