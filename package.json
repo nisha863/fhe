@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
@@ -25,6 +25,9 @@
 		"vite": "^6.2.6"
 	},
 	"dependencies": {
+		"mysql2": "^3.14.1",
+		"pdf": "^0.1.0",
+		"pdf-lib": "^1.17.1",
 		"signature_pad": "^5.0.9"
 	}
 }
