@@ -1,3 +1,4 @@
+
 <script>
 	import { onMount } from "svelte";
 	import BulkPrint from "../../lib/components/BulkPrint.svelte";
@@ -134,13 +135,7 @@
 	</div>
 	<div class="flex flex-wrap gap-4 justify-end mt-6">
 		<button on:click={printPage} class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"> Print List </button>
-		<button
-			on:click={printSelected}
-			class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
-			disabled={selected.size === 0}
-		>
-			Print Selected
-		</button>
+		<button on:click={printSelected} class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition" disabled={selected.size === 0}> Print Selected </button>
 	</div>
 	{#if showBulkPrint}
 		<BulkPrint show={showBulkPrint} students={students.filter((s) => selected.has(s.id))} {pdfUrl} on:close={closeBulkPrint} />
