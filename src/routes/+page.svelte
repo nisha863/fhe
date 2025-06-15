@@ -70,6 +70,9 @@
   });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 		const formData = new FormData();
 		formData.append("student_picture", student_picture);
 		formData.append("student_signature", studentsignatureData);
@@ -115,6 +118,7 @@
     studentsignatureData = "";
   }
 
+<<<<<<< HEAD
   function clearGuardianSignature() {
     guardianSignaturePad.clear();
     guardianSignatureData = "";
@@ -122,6 +126,36 @@
 
   async function submitForm(event) {
     event.preventDefault();
+=======
+    // Use FormData to send the image and other fields
+    const formData = new FormData();
+    formData.append("student_picture", student_picture);
+    formData.append("student_signature", studentsignatureData);
+    formData.append("guardian_signature", guardianSignatureData);
+    formData.append("guardian_name", guardian_name);
+    formData.append("guardian_relationship", guardian_relationship);
+    formData.append("fullname", fullname);
+    formData.append("id", id);
+    formData.append("address", address);
+    formData.append("sex", sex);
+    formData.append("civil_status", civil_status);
+    formData.append("phone", phone);
+    formData.append("email", email);
+    formData.append("course", course);
+    formData.append("year_level", year_level);
+    formData.append("type_student", JSON.stringify(type_student));
+    formData.append("school_name_last_attended", school_name_last_attended);
+    formData.append("year_last_attended", year_last_attended);
+    formData.append("scholarship", scholarship);
+    formData.append("scholarship_name", scholarship_name);
+    formData.append("mother_name", mother_name);
+    formData.append("father_name", father_name);
+    formData.append("mother_occupation", mother_occupation);
+    formData.append("father_occupation", father_occupation);
+    formData.append("mother_income", mother_income);
+    formData.append("father_income", father_income);
+    formData.append("date_of_application", date_of_application);
+>>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 
     studentsignatureData = !studentsignaturePad.isEmpty() ? studentsignaturePad.toDataURL() : "";
     guardianSignatureData = !guardianSignaturePad.isEmpty() ? guardianSignaturePad.toDataURL() : "";
@@ -283,6 +317,9 @@
 <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Free Higher Education Application Form</h1>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 <div class="sm:p-4 bg-gray-100 shadow-md rounded-lg m-[10%]">
 	<form on:submit={submitForm}>
 		<fieldset class="border border-gray-600 p-2 sm:p-16 rounded-md">
@@ -844,6 +881,7 @@ input[type="checkbox"] {
 		}
 	}
 </style>
+<<<<<<< HEAD
 =======
 <div class="mx-auto p-2 sm:p-4 bg-gray-100 shadow-md rounded-lg" style="max-width:900px;">
   {#if serverMessage}
@@ -1093,3 +1131,5 @@ input[type="checkbox"] {
   </form>
 </div>
 >>>>>>> origin/main
+=======
+>>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
 header("Content-Type: application/json");
 header("Content-Type: application/json");
@@ -85,12 +86,27 @@ $conn->close();
 =======
 <?php
 header("Content-Type: application/json");
+=======
+<?php
+header("Content-Type: application/json");
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST");
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+>>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 
 // Database connection
 $host = "localhost";
 $user = "root";
 $pass = "";
+<<<<<<< HEAD
 $db = "your_database_name"; // Change to your actual database name
+=======
+$db = "fhe_db"; // Change to your actual database name
+
+>>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
@@ -159,5 +175,8 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $conn->close();
+<<<<<<< HEAD
 >>>>>>> origin/main
+=======
+>>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 ?>
