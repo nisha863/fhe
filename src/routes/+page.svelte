@@ -1,12 +1,6 @@
 <script>
-<<<<<<< HEAD
-	import FHEPreviewModal from "../lib/components/FHEPreviewModal.svelte";
-	import FHEPrintModal from "../lib/components/BulkPrint.svelte";
-	import SignatureModal from "../lib/components/SignatureModal.svelte";
-=======
   import { onMount } from 'svelte';
   import SignaturePad from "signature_pad";
->>>>>>> origin/main
 
   let studentcanvas;
   let studentsignaturePad;
@@ -68,11 +62,6 @@
     studentsignaturePad = new SignaturePad(studentcanvas);
     guardianSignaturePad = new SignaturePad(guardianCanvas);
   });
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 		const formData = new FormData();
 		formData.append("student_picture", student_picture);
 		formData.append("student_signature", studentsignatureData);
@@ -110,23 +99,13 @@
 			if (!response.ok) {
 				serverMessage = "Submission failed. Please try again.";
 				serverMessageType = "error";
-				return;
+				// return ;
 			}
-=======
   function clearSignature() {
     studentsignaturePad.clear();
     studentsignatureData = "";
   }
 
-<<<<<<< HEAD
-  function clearGuardianSignature() {
-    guardianSignaturePad.clear();
-    guardianSignatureData = "";
-  }
-
-  async function submitForm(event) {
-    event.preventDefault();
-=======
     // Use FormData to send the image and other fields
     const formData = new FormData();
     formData.append("student_picture", student_picture);
@@ -155,136 +134,11 @@
     formData.append("mother_income", mother_income);
     formData.append("father_income", father_income);
     formData.append("date_of_application", date_of_application);
->>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 
     studentsignatureData = !studentsignaturePad.isEmpty() ? studentsignaturePad.toDataURL() : "";
     guardianSignatureData = !guardianSignaturePad.isEmpty() ? guardianSignaturePad.toDataURL() : "";
->>>>>>> origin/main
 
-    // Use FormData to send the image and other fields
-    const formData = new FormData();
-    formData.append("student_picture", student_picture);
-    formData.append("student_signature", studentsignatureData);
-    formData.append("guardian_signature", guardianSignatureData);
-    formData.append("guardian_name", guardian_name);
-    formData.append("guardian_relationship", guardian_relationship);
-    formData.append("fullname", fullname);
-    formData.append("id", id);
-    formData.append("address", address);
-    formData.append("sex", sex);
-    formData.append("civil_status", civil_status);
-    formData.append("phone", phone);
-    formData.append("email", email);
-    formData.append("course", course);
-    formData.append("year_level", year_level);
-    formData.append("type_student", JSON.stringify(type_student));
-    formData.append("school_name_last_attended", school_name_last_attended);
-    formData.append("year_last_attended", year_last_attended);
-    formData.append("scholarship", scholarship);
-    formData.append("scholarship_name", scholarship_name);
-    formData.append("mother_name", mother_name);
-    formData.append("father_name", father_name);
-    formData.append("mother_occupation", mother_occupation);
-    formData.append("father_occupation", father_occupation);
-    formData.append("mother_income", mother_income);
-    formData.append("father_income", father_income);
-    formData.append("date_of_application", date_of_application);
 
-<<<<<<< HEAD
-			serverMessage = result.message || "Thanks for submitting!";
-			serverMessageType = result.success ? "success" : "error";
-		} catch (error) {
-			serverMessage = "An error occurred. Please try again.";
-			serverMessageType = "error";
-		}
-	}
-	// adding current date as default value for date_of_application
-	if (date_of_application === "") {
-		date_of_application = new Date().toISOString().split("T")[0];
-	}
-	// for default values
-	if (sex === "") {
-		sex = "Male";
-	}
-	if (civil_status === "") {
-		civil_status = "Single";
-	}
-	if (scholarship === "") {
-		scholarship = "No";
-	}
-	if (type_student === "") {
-		type_student = "Continuing";
-	}
-
-	//for debugging purposes, add default values for easy adjustments
-	console.log("Form initialized with default values");
-	if (fullname === "") {
-		fullname = "Kerwin Klyde F. Miranda";
-	}
-	if (email === "") {
-		email = "kerwin@example.com";
-	}
-	if (phone === "") {
-		phone = "09123456789";
-	}
-	if (course === "") {
-		course = "Bachelor of Science in Computer Science";
-	}
-	if (id === "") {
-		id = "123456789";
-	}
-	if (address === "") {
-		address = "Barangay No. 7-A, Nuestra Señora del Natividad Laoag City, Ilocos Norte";
-	}
-	if (sex === "") {
-		sex = "Female";
-	}
-	if (civil_status === "") {
-		civil_status = "Married";
-	}
-	if (year_level === "") {
-		year_level = "1st Year";
-	}
-	if (type_student.length === 0) {
-		type_student = ["Returning"];
-	}
-	if (school_name_last_attended === "") {
-		school_name_last_attended = "Laoag City National High School";
-	}
-	if (year_last_attended === "") {
-		year_last_attended = "2022-2023";
-	}
-	if (scholarship === "") {
-		scholarship = "No";
-	}
-	if (scholarship_name === "") {
-		scholarship_name = "N/A";
-	}
-	if (mother_name === "") {
-		mother_name = "Maria Clara";
-	}
-	if (father_name === "") {
-		father_name = "Jose Rizal";
-	}
-	if (mother_occupation === "") {
-		mother_occupation = "Teacher";
-	}
-	if (father_occupation === "") {
-		father_occupation = "Engineer";
-	}
-	if (mother_income === 0.0) {
-		mother_income = 50000;
-	}
-	if (father_income === 0.0) {
-		father_income = 60000;
-	}
-	if (guardian_name === "") {
-		guardian_name = "Lola Maria";
-	}
-	if (guardian_relationship === "") {
-		guardian_relationship = "Guardian";
-	}
-=======
     try {
       const response = await fetch('http://localhost/back-folder/student.php', {
         method: 'POST',
@@ -303,7 +157,6 @@
       } catch {
         result = { message: await response.text(), success: false };
       }
->>>>>>> origin/main
 
       serverMessage = result.message || "Thanks for submitting!";
       serverMessageType = result.success ? "success" : "error";
@@ -316,10 +169,6 @@
 
 <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Free Higher Education Application Form</h1>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
 <div class="sm:p-4 bg-gray-100 shadow-md rounded-lg m-[10%]">
 	<form on:submit={submitForm}>
 		<fieldset class="border border-gray-600 p-2 sm:p-16 rounded-md">
@@ -881,8 +730,6 @@ input[type="checkbox"] {
 		}
 	}
 </style>
-<<<<<<< HEAD
-=======
 <div class="mx-auto p-2 sm:p-4 bg-gray-100 shadow-md rounded-lg" style="max-width:900px;">
   {#if serverMessage}
     <div class="mb-4 p-3 rounded border text-center"
@@ -1130,6 +977,3 @@ input[type="checkbox"] {
     </fieldset>
   </form>
 </div>
->>>>>>> origin/main
-=======
->>>>>>> 5ca5cc5154027683a13593170ecbac58808e48ae
