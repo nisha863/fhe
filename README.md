@@ -21,7 +21,7 @@ cd to the cloned folder and do:
 ``` 
 npm run dev
 ```
-this will run vite that show sveltekit in http://localhost:5173/ or just press "o" and enter in the terminal after vite is running
+this will run vite that compiled svelte in http://localhost:5173/ or just press "o" and enter in the terminal after vite is running
 ## npm package used
 | Package   | Version | Description |
 |-----------|---------|-------------|
@@ -31,7 +31,8 @@ this will run vite that show sveltekit in http://localhost:5173/ or just press "
 
 # fixing common problems
 ### the database
-- import [the sql](https://github.com/nisha863/fhe/blob/main/fhe_db.sql) as database
+- import [the sql](fhe_db.sql) as database
+- edit the [.env](.env) for mysql credentials
 
 
 
