@@ -12,7 +12,6 @@
 
 cd to desired folder or open powershell to that folder and paste the following:
 ```
-npm run dev
 git clone https://github.com/nisha863/fhe.git
 cd fhe
 npm install
