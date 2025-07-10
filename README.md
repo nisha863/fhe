@@ -8,16 +8,14 @@
 - node js - for running and installing svelteKit
 
 ## Installation
->first install [Git here](https://git-scm.com/downloads/win) and [node js here](https://nodejs.org/en/download)
-
-cd to desired folder or open powershell to that folder and paste the following:
+cd to desired folder or open powershell to that folder and enter these commands:
 ```
 git clone https://github.com/nisha863/fhe.git
 cd fhe
 npm install
 ```
 ## running
-cd to the cloned folder and do:
+cd to the cloned folder and enter:
 ``` 
 npm run dev
 ```
