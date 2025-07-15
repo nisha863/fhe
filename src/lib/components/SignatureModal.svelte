@@ -1,6 +1,8 @@
 <script>
-	import SignaturePad from "signature_pad";
+	// @ts-nocheck
 	import { createEventDispatcher, onMount } from "svelte";
+	import { browser } from "$app/environment";
+
 	export let show = false;
 	export let value = "";
 	export let label = "Signature";
@@ -11,8 +13,11 @@
 	let signatureData = value;
 	let isSaved = !!value;
 
-	onMount(() => {
-		if (canvas) {
+	onMount(async () => {
+		if (browser && canvas) {
+			// Dynamically import SignaturePad only on the client side
+			const { default: SignaturePad } = await import("signature_pad");
+
 			signaturePad = new SignaturePad(canvas);
 			if (signatureData) {
 				const img = new window.Image();
@@ -26,30 +31,32 @@
 		}
 	});
 
-	$: if (show && canvas) {
-		// Re-initialize SignaturePad every time modal is shown
-		signaturePad = new SignaturePad(canvas);
-		if (value && isSaved) {
-			const img = new window.Image();
-			img.onload = () => {
-				signaturePad.clear();
-				const ctx = canvas.getContext("2d");
-				ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-			};
-			img.src = value;
-		} else {
-			signaturePad.clear();
-		}
+	// Only initialize when modal first shows
+	$: if (show && canvas && browser && !signaturePad) {
+		import("signature_pad").then(({ default: SignaturePad }) => {
+			signaturePad = new SignaturePad(canvas);
+			if (value && isSaved) {
+				const img = new window.Image();
+				img.onload = () => {
+					signaturePad.clear();
+					const ctx = canvas.getContext("2d");
+					ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+				};
+				img.src = value;
+			}
+		});
 	}
 
 	function clearSignature() {
-		signaturePad.clear();
+		if (signaturePad) {
+			signaturePad.clear();
+		}
 		signatureData = "";
 		isSaved = false;
 	}
 
 	function saveSignature() {
-		if (!signaturePad.isEmpty()) {
+		if (signaturePad && !signaturePad.isEmpty()) {
 			signatureData = signaturePad.toDataURL();
 			isSaved = true;
 			dispatch("save", { data: signatureData });
@@ -65,6 +72,11 @@
 	}
 
 	function close() {
+		// Clean up the SignaturePad instance when closing
+		if (signaturePad) {
+			signaturePad.off(); // Remove event listeners
+			signaturePad = null;
+		}
 		dispatch("close");
 	}
 </script>
